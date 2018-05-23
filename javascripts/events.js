@@ -22,7 +22,8 @@ const pressEnter = () => {
   // keyPress Event
   $(document).keypress((e) => {
     if (e.key === 'Enter') {
-      tmbd.showResults('cow');
+      const searchWords = $('#searchBar').val().replace(' ', '%20');
+      tmbd.showResults(searchWords);
     };
   });
 };
