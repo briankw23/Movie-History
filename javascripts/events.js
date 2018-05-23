@@ -20,7 +20,11 @@ const mylinks = () => {
 
 const pressEnter = () => {
   // keyPress Event
-  tmbd.showResults();
+  $(document).keypress((e) => {
+    if (e.key === 'Enter') {
+      tmbd.showResults('cow');
+    };
+  });
 };
 
 const initializer = () => {
