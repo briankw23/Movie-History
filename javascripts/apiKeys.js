@@ -16,6 +16,7 @@ const retrieveKeys = () => {
   apiKeys()
     .then((results) => {
       tmbd.setKey(results.tmdb.apiKey);
+      firebase.initializeApp(results.firebase);
     })
     .catch((err) => {
       console.error('no keys:', err);

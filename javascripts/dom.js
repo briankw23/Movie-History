@@ -1,7 +1,6 @@
 const domString = (movieArray, config) => {
   let string = '';
   movieArray.forEach((movie, index) => {
-    console.error('index', index);
     if (index % 3 === 0) {
       string += `<div class="row">`;
     }
