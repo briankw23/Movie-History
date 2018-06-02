@@ -58,9 +58,26 @@ const deleteMovieFromDatabase = (movieId) => {
   });
 };
 
+const updateMovieToWatchedInDb = (updatedMovie, movieId) => {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      method: 'PUT',
+      url: `${firebaseConfig.databaseURL}/movies/${movieId}.json`,
+      data: JSON.stringify(updatedMovie),
+    })
+      .done((modMovie) => {
+        resolve(modMovie);
+      })
+      .fail((error) => {
+        console.error(error);
+      });
+  });
+};
+
 module.exports = {
   saveMovieToWishList,
   setConfig,
   getAllMovies,
   deleteMovieFromDatabase,
+  updateMovieToWatchedInDb,
 };
