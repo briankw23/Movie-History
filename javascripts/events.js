@@ -32,7 +32,7 @@ const pressEnter = () => {
   });
 };
 const saveMovieToWishlistEvent = () => {
-  $(document).on('click','.addMovietoWishlist', (e) => {
+  $(document).on('click', '.addMovietoWishlist', (e) => {
     const movieToAddCard = $(e.target).closest('.movie');
     const movieToAdd = {
       title: movieToAddCard.find('.movie-title').text(),
@@ -144,14 +144,22 @@ const authEvents = () => {
         console.error(errorMessage);
       });
   });
+
   $('#register-btn').click((e) => {
+    e.preventDefault();
     const email = $('#registerEmail').val();
     const pass = $('#registerPassword').val();
-    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function (error) {
-      const errorMessage = error.message;
-      console.log(errorMessage);
-    });
+
+    firebase.auth().createUserWithEmailAndPassword(email, pass)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        // const errorMessage = error.message;
+        console.log(error);
+      });
   });
+
   $('#register-link').click((e) => {
     $('#login-form').addClass('hide');
     $('#registration-form').removeClass('hide');
