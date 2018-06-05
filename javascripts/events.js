@@ -25,7 +25,7 @@ const mylinks = () => {
 const pressEnter = () => {
   // keyPress Event
   $(document).keypress((e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !$('#search').hasClass('hide')) {
       const searchWords = $('#searchBar').val().replace(' ', '%20');
       tmbd.showResults(searchWords);
     };
@@ -129,6 +129,41 @@ const filterEvents = () => {
     }
   });
 };
+
+const authEvents = () => {
+  $('#signin-btn').click((e) => {
+    e.preventDefault();
+    const email = $('#inputEmail').val();
+    const pass = $('#inputPassword').val();
+    firebase.auth().signInWithEmailAndPassword(email, pass)
+      .then((user) => {
+
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.error(errorMessage);
+      });
+  });
+
+  $('#register-link').click((e) => {
+    $('#login-form').addClass('hide');
+    $('#registration-form').removeClass('hide');
+  });
+
+  $('#signin-link').click((e) => {
+    $('#login-form').removeClass('hide');
+    $('#registration-form').addClass('hide');
+  });
+  $('#logout').click((e) => {
+    firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+
+    }).catch(function (error) {
+      // An error happened.
+    });
+  });
+};
+
 const initializer = () => {
   mylinks();
   pressEnter();
@@ -136,8 +171,10 @@ const initializer = () => {
   deleteMovieFromFirebase();
   updateMovieEvent();
   filterEvents();
+  authEvents();
 };
 
 module.exports = {
   initializer,
+  getAllMoviesEvent,
 };
