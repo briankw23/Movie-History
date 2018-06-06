@@ -1,11 +1,15 @@
 const {getAllMoviesEvent,} = require('./events');
 
+const {setUID,} = require('./firebaseApi');
+
 const checkLoginStatus = () => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+      setUID(user.uid);
       // User is signed in.
       $('#authScreen').addClass('hide');
       $('#myMovies').removeClass('hide');
+      $('#savedMovies').removeClass('hide');
       $('#search').addClass('hide');
       $('#movielink, #searchlink, #logout').removeClass('hide');
       $('#authlink').addClass('hide');
@@ -18,6 +22,7 @@ const checkLoginStatus = () => {
       $('#authScreen').removeClass('hide');
       $('#savedMovies, #searchlink, #logout').addClass('hide');
       $('#authlink').removeClass('hide');
+      $('#movielink').addClass('hide');
     };
   });
 };
