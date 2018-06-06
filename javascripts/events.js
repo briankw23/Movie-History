@@ -140,8 +140,9 @@ const authEvents = () => {
 
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        console.error(errorMessage);
+        $('#signin-error-msg').text(error.message);
+        $('#signin-error').removeClass('hide');
+        console.error(error.message);
       });
   });
 
@@ -155,8 +156,9 @@ const authEvents = () => {
         console.log(result);
       })
       .catch((error) => {
-        // const errorMessage = error.message;
-        console.log(error);
+        $('#register-error-msg').text(error.message);
+        $('#register-error').removeClass('hide');
+
       });
   });
 
